@@ -11,4 +11,12 @@ router.get('/', function(req, res, next) {
     .catch(res.send)
 });
 
+router.get('/:id', function(req, res, next) {
+  const {id} = req.params;
+  Auction
+    .findById(id)
+    .then(auction => res.json({auction}))
+    .catch(err => console.info(err))
+})
+
 module.exports = router;
