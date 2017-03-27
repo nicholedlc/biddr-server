@@ -9,7 +9,8 @@ router.get('/', function(req, res, next) {
     .then(auctions => {
       res.json({auctions})
     })
-    .catch(res.send)
+    .catch(err => {
+      res.json({error: {name: err.name, message: err.message}})
 });
 
 //Auctions#show - URL: /api/auctions/:id, METHOD: GET
@@ -20,7 +21,22 @@ router.get('/:id', function(req, res, next) {
     .then(auction => {
       res.json({auction})
     })
-    .catch(err => console.info(err))
+    .catch(err => {
+      res.json({error: {name: err.name, message: err.message}})
+    })
+});
+
+router.delete('/:id', function(req, res, next) {
+  const {id} = req.params;
+  Auction
+    .findById(id)
+    .then(auction =>
+      auction.destroy()
+      .then(() => res.json({auction}))
+    )
+    .catch(err => {
+      res.json({error: {name: err.name, message: err.message}})
+    })
 });
 
 module.exports = router;
