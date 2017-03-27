@@ -1,5 +1,10 @@
 <%- include('../partials/header') %>
 
     <h1>AUCTIONS</h1>
+    <div>
+      <% auctions.map((auc, i) => { %>
+        <div class="auction-title"><%= auc.title %>: <span><%= auc.id %><span></div>
+      <% }) %>
+    </div>
 
 <%- include('../partials/footer') %>
