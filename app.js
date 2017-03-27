@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 
 const users = require('./routes/users');
 const auctions = require('./routes/auctions');
+const api = require('./routes/api')
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', auctions);
+app.use('/api', api);
 app.use('/users', users);
 app.use('/auctions', auctions);
 
