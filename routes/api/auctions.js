@@ -5,7 +5,7 @@ const {Auction} = require('../../models/index');
 // Auctions#index - URL: /api/auctions, METHOD: GET
 router.get('/', function(req, res, next) {
   Auction
-    .findAll()
+    .findAll({order: [['updatedAt', 'DESC']]})
     .then(auctions => {
       res.json({auctions})
     })

@@ -1,24 +1,23 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('Auctions', {
+    return queryInterface.createTable('Bids', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
-        type: Sequelize.STRING
+      AuctionId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Auctions',
+          key: 'id'
+        },
+        onDelete: 'CASCADE'
       },
-      details: {
-        type: Sequelize.TEXT
-      },
-      endsOn: {
-        type: Sequelize.DATE
-      },
-      reservePrice: {
-        type: Sequelize.DOUBLE
+      bid: {
+        type: Sequelize.FLOAT
       },
       createdAt: {
         allowNull: false,
@@ -31,6 +30,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Auctions');
+    return queryInterface.dropTable('Bids');
   }
 };
